@@ -1,0 +1,12 @@
+
+
+# Ignore node modules.
+node_modules
+
+# Ignore the ide files.
+.idea
+
+# Ignore css and js map.
+*.css.map
+*.js.map
+
