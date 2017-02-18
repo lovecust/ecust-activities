@@ -11,10 +11,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
+import ActionContentAdd from 'material-ui/svg-icons/content/add';
 import {Router, Route, Link, browserHistory} from 'react-router';
 import Strings from './../resources/Strings';
 import Styles from './../resources/Styles';
 import Activity from './../../network/ecust/activities'
+import ActivityImagesPicker from './ActivityImagesPicker';
 
 /**
  * Target that describes why this page is requested.
@@ -28,6 +30,9 @@ class PostAnActivity extends React.Component {
 		super(props);
 		this.postAnActivity = this.postAnActivity.bind(this);
 		this.onTextChange = this.onTextChange.bind(this);
+		this.onImageChosen = this.onImageChosen.bind(this);
+		this.onCoverChosen = this.onCoverChosen.bind(this);
+		this.exit = this.exit.bind(this);
 		this.state = {};
 		/**
 		 * Activity fetched from server.
@@ -38,6 +43,8 @@ class PostAnActivity extends React.Component {
 		 */
 		this.activityPatch = {};
 		let _this = this;
+		// Activity ID.
+		this.activityID = this.props.params.activityID;
 		if (this.props.params.activityID) {
 			Activity.getActivityDetail(this.props.params.activityID).then(activity => {
 				/**
@@ -90,6 +97,45 @@ class PostAnActivity extends React.Component {
 		}
 	}
 
+	/**
+	 * On poster chosen.
+	 */
+	onImageChosen(image) {
+		let s = this.state;
+		let posters;
+		if (s.posters) {
+			posters = [...s.posters, image.imageID];
+		} else {
+			posters = [image.imageID];
+		}
+		if (JSON.stringify(this.activity.posters) === JSON.stringify(posters)) {
+			delete this.activityPatch.posters;
+		} else {
+			this.activityPatch.posters = posters;
+		}
+		this.setState({
+			posters: posters
+		});
+	}
+
+	/**
+	 * On cover chosen.
+	 */
+	onCoverChosen(image) {
+		this.setState({
+			cover: image.imageID
+		});
+		if (this.activity.cover === image.imageID) {
+			// Remove cover in patch if Image ID of Activity Cover equals original.
+			delete this.activityPatch.cover;
+		} else {
+			this.activityPatch.cover = image.imageID;
+		}
+	}
+
+	/**
+	 * On activity text field changed.
+	 */
 	onTextChange(event) {
 		let t = event.target;
 		this.setState({
@@ -107,6 +153,21 @@ class PostAnActivity extends React.Component {
 		let f = Strings.postActivity.form;
 		let b = Strings.postActivity.button;
 		let s = this.state;
+		let getPoster = (posterID) => {
+			return (
+				<img
+					key={posterID}
+					src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${posterID}`}
+					style={{width: '30%', maxWidth: '300px', display: 'inline-block'}}
+					title="Activity Poster" alt="Activity Poster"/>
+			)
+		};
+		let getPosters = () => {
+			if (!s.posters) {return;}
+			return (
+				s.posters.map(getPoster)
+			)
+		};
 		return (
 			<div>
 				<AppBar title={Strings.postActivity.title}
@@ -153,6 +214,25 @@ class PostAnActivity extends React.Component {
 						value={s.location}
 					/>
 					<br/>
+					<div>
+						<p>Activity Cover</p>
+						{s.cover ?
+							<div>
+								<img
+									src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${s.cover}`}
+									style={{width: '90%', maxWidth: '300px'}}
+									title="Activity Cover" alt="Activity Cover"/>
+							</div>
+							:
+							<ActivityImagesPicker activityID={this.activityID}
+							                      onImageChosen={this.onCoverChosen}/>
+						}
+					</div>
+					<div>
+						<p>Posters</p>
+						<ActivityImagesPicker activityID={this.activityID} onImageChosen={this.onImageChosen}/>
+						{getPosters()}
+					</div>
 					<RaisedButton label={b.post.text} secondary={true} style={{width: '100%', margin: '20 0 0 0'}}
 					              onTouchTap={this.postAnActivity}/>
 				</div>

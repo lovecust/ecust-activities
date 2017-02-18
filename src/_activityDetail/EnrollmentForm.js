@@ -67,28 +67,24 @@ class EnrollmentForm extends React.Component {
 			name: 'name',
 			hint: 'Your Name',
 			label: 'Name',
-			defaultValue: '',
 			multiLine: false
 		}, {
 			_id: 'b',
 			name: 'campusID',
 			hint: 'Your Campus ID',
 			label: 'Campus ID',
-			defaultValue: '',
 			multiLine: false
 		}, {
 			_id: 'c',
 			name: 'major',
 			hint: 'Your Major',
 			label: 'Major',
-			defaultValue: '',
 			multiLine: false
 		}, {
 			_id: 'd',
 			name: 'email',
 			hint: 'Your Email',
 			label: 'Email',
-			defaultValue: '',
 			multiLine: false
 		}];
 		let getTextField = (field) => {
@@ -100,7 +96,6 @@ class EnrollmentForm extends React.Component {
 						floatingLabelText={field.label}
 						onChange={this.onTextChange}
 						fullWidth={true}
-						defaultValue={field.defaultValue}
 						multiLine={field.multiLine}
 						value={s[field.name] || field.defaultValue || ''}
 					/>

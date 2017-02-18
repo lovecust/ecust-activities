@@ -4,30 +4,18 @@
 
 [Lovecust Activity][website-activities-lovecust-com] is a platform to broadcast Ecust clubs and their activities.
 
-<!-- <iframe width='100%' src="http://activities.lovecust.com/"></iframe> -->
+## Running the Example
 
-## WHY
-
-[//]: # (#### More than Current Status)
-
-[//]: # (You can analyze the data of Ecust Library.)
-
-[//]: # (#### Analyzing Library Status Statistics)
-
-#### Learning React and Build this Project by Yourself
-
-It may be an example if you are just learning React 101. You may clone this project and build on your own.
-
-Run the commands:
+Cline the codes and install dependencies.
 
 ```bash
-git clone --recursive https://github.com/lovecust/lovecust-lib.git
+git clone --recursive https://github.com/lovecust/ecust-activities.git
 npm install
 npm run build
-npm run build-production
 ```
 
-Then `library.js` will be generated under `dist` folder.
+Then generated `main.js` will be generated under `dist` folder.
+You have to serve `./dist` as static files at port `3000`, then open your browser http://localtest.me:3000/.
 
 ## Node Modules
 
@@ -52,8 +40,7 @@ Here are some node modules used in this project and you can go to the website an
 
 - Routes path using '#'
 - Fixed position for Floating Action Button and RefreshIndicator.
-- 
-
+- Hot-fix failed.
 
 [github-fetch]: https://github.com/github/fetch "github: fetch"
 [github-preact]: https://github.com/developit/preact/ "github: preact"

@@ -51,7 +51,17 @@ exports.postActivity = {
 	button: {
 		post: {
 			text: 'Post Now'
+		},
+		uploadImage: {
+			text: 'Upload Image'
+		},
+		chooseImage: {
+			text: 'Choose Image'
 		}
+	},
+	// Activity Images Picker module.
+	imagesPicker: {
+		title: 'Choose An Image'
 	}
 };
 

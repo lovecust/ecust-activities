@@ -24,6 +24,7 @@ class ActivityDetail extends React.Component {
 		this.state = {
 			activity: {}
 		};
+		this.activityID = this.props.params.activityID;
 		let _this = this;
 		Activity.getActivityDetail(this.props.params.activityID).then((activity) => {
 			_this.setState({activity: activity});
@@ -40,6 +41,21 @@ class ActivityDetail extends React.Component {
 	render() {
 		let {activity} = this.state;
 		document.title = activity.name;
+		let getPoster = (posterID) => {
+			return (
+				<img
+					key={posterID}
+					src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${posterID}`}
+					style={{width: '30%', maxWidth: '300px', display: 'inline-block'}}
+					title="Activity Poster" alt="Activity Poster"/>
+			)
+		};
+		let getPosters = () => {
+			if (!activity.posters) {return;}
+			return (
+				activity.posters.map(getPoster)
+			)
+		};
 		return (
 			<div>
 				<AppBar title={activity.name}
@@ -49,6 +65,13 @@ class ActivityDetail extends React.Component {
 				<div style={Styles.main}>
 					<div>
 						<p>{activity.description}</p>
+						{activity.cover ?
+							<img
+								src={`http://api.localtest.me/ecust/activities/${activity._id}/images/${activity.cover}`}
+								style={{width: '90%', maxWidth: '300px'}}
+								title="Activity Cover" alt="Activity Cover"/>
+							: null
+						}
 						<div>
 							<span>Time: </span>
 							<time>{activity.time}</time>
@@ -56,18 +79,25 @@ class ActivityDetail extends React.Component {
 							<span>Location: </span><span>{activity.location}</span>
 						</div>
 						<div>
-							<span>Views: </span><span>13</span>
+							<p>Posters</p>
+							{getPosters()}
+						</div>
+						{/*<PostActivityImages activityID={this.activityID}/>*/}
+						<div>
+							<span>Views: </span><span>11</span>
 							<br/>
 							<span>Likes: </span><span>2</span>
 						</div>
 						<div>
 							<Link onlyActiveOnIndex={true} to={`${Routes.postActivity}/${activity._id}`}>
-								Edit
+								<RaisedButton label={'Edit'} secondary={true}/>
 							</Link>
 							<span> </span>
 							<Link to={`${Routes.PATH_ACTIVITY_STATISTICS}/${activity._id}`}>
-								Statistics
+								<RaisedButton label={'Statistics'} secondary={true}/>
 							</Link>
+							<br/>
+							<br/>
 						</div>
 					</div>
 					<div>

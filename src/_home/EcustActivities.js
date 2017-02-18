@@ -38,8 +38,15 @@ class ActivityList extends React.Component {
 				// See https://fb.me/react-warning-keys for more information.
 				<Paper style={style} key={activity._id}>
 					<div>
-						<h3><Link to={`/${activity._id}`}>{activity.name}</Link></h3>
+						<h3><Link to={Routes.getActivityLink(activity._id)}>{activity.name}</Link></h3>
 						<p>{activity.description}</p>
+						{activity.cover ?
+							<img
+								src={`http://api.localtest.me/ecust/activities/${activity._id}/images/${activity.cover}`}
+								style={{width: '90%', maxWidth: '300px'}}
+								title="Activity Cover" alt="Activity Cover"/>
+							: null
+						}
 						<div>
 							<time>{activity.time}</time>
 							<br/>

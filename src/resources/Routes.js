@@ -13,6 +13,7 @@ exports.postedActivities = home + 'posts';
 exports.joinedActivities = home + 'joined';
 exports.favoriteActivities = home + 'favorites';
 exports.updateActivity = exports.postActivity + '/:activityID';
+exports.getActivityLink = (activityID) => `${home}${activityID}`;
 exports.activityDetail = home + ':activityID';
 
 /**
