@@ -11,10 +11,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import ActionContentAdd from 'material-ui/svg-icons/content/add';
 import {Router, Route, Link, browserHistory} from 'react-router';
 import Strings from './../resources/Strings';
 import Styles from './../resources/Styles';
+import Routes from './../resources/Routes';
 import Activity from './../../network/ecust/activities'
 import ActivityImagesPicker from './ActivityImagesPicker';
 
@@ -25,6 +25,9 @@ import ActivityImagesPicker from './ActivityImagesPicker';
 let TARGET_POST = 'TARGET_POST';
 let TARGET_UPDATE = 'TARGET_UPDATE';
 
+/**
+ * FIXME Save as draft before uploading images.
+ */
 class PostAnActivity extends React.Component {
 	constructor(props) {
 		super(props);
@@ -77,7 +80,7 @@ class PostAnActivity extends React.Component {
 			}
 			Activity.postActivity(this.activityPatch).then(activity => {
 				console.log('Activity Posted!', activity);
-				browserHistory.push(`/${activity._id}`);
+				browserHistory.push(Routes.getActivityLink(activity._id));
 			}).catch(err => {
 				alert(`Some error happened when posting activity! ${JSON.stringify(err)}`);
 				console.log(err);
@@ -157,7 +160,7 @@ class PostAnActivity extends React.Component {
 			return (
 				<img
 					key={posterID}
-					src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${posterID}`}
+					src={Routes.getActivityImagePath(this.activityID, posterID)}
 					style={{width: '30%', maxWidth: '300px', display: 'inline-block'}}
 					title="Activity Poster" alt="Activity Poster"/>
 			)
@@ -219,7 +222,7 @@ class PostAnActivity extends React.Component {
 						{s.cover ?
 							<div>
 								<img
-									src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${s.cover}`}
+									src={Routes.getActivityImagePath(this.activityID, s.cover)}
 									style={{width: '90%', maxWidth: '300px'}}
 									title="Activity Cover" alt="Activity Cover"/>
 							</div>

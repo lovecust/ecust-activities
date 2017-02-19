@@ -51,16 +51,16 @@ class HomeAppBar extends React.Component {
 					onRequestChange={(drawerStatus) => this.setState({drawerStatus: drawerStatus})}
 				>
 					<MenuItem onTouchTap={this.closeDrawer}>
-						<Link onlyActiveOnIndex={true} to={Routes.home}>{s.allActivities}</Link>
+						<Link onlyActiveOnIndex={true} to={Routes.ROUTE_HOME}>{s.allActivities}</Link>
 					</MenuItem>
 					<MenuItem onTouchTap={this.closeDrawer}>
-						<Link onlyActiveOnIndex={true} to={Routes.home}>{s.joinedActivities}</Link>
+						<Link onlyActiveOnIndex={true} to={Routes.ROUTE_HOME}>{s.joinedActivities}</Link>
 					</MenuItem>
 					<MenuItem onTouchTap={this.closeDrawer}>
-						<Link onlyActiveOnIndex={false} to={Routes.home}>{s.postedActivities}</Link>
+						<Link onlyActiveOnIndex={false} to={Routes.ROUTE_HOME}>{s.postedActivities}</Link>
 					</MenuItem>
 					<MenuItem onTouchTap={this.closeDrawer}>
-						<Link onlyActiveOnIndex={false} to={Routes.home}>{s.favoriteActivities}</Link>
+						<Link onlyActiveOnIndex={false} to={Routes.ROUTE_HOME}>{s.favoriteActivities}</Link>
 					</MenuItem>
 				</Drawer>
 			</div>

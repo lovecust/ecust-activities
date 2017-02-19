@@ -42,7 +42,7 @@ class ActivityList extends React.Component {
 						<p>{activity.description}</p>
 						{activity.cover ?
 							<img
-								src={`http://api.localtest.me/ecust/activities/${activity._id}/images/${activity.cover}`}
+								src={Routes.getActivityImagePath(activity._id, activity.cover)}
 								style={{width: '90%', maxWidth: '300px'}}
 								title="Activity Cover" alt="Activity Cover"/>
 							: null
@@ -75,7 +75,7 @@ class ActivityList extends React.Component {
 				<div style={{
 					margin: '10px'
 				}}>
-					<Link to={Routes.postActivity}>
+					<Link to={Routes.ROUTE_POST_ACTIVITY}>
 						<FloatingActionButton secondary={true}>
 							<ContentAdd/>
 						</FloatingActionButton>

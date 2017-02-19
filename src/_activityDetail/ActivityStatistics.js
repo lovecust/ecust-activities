@@ -65,7 +65,7 @@ class ActivityStatistics extends React.Component {
 							<span>Likes: </span><span>2</span>
 						</div>
 						<div>
-							<Link onlyActiveOnIndex={true} to={`${Routes.postActivity}/${activity._id}`}>
+							<Link onlyActiveOnIndex={true} to={Routes.getUpdateActivityPath(activity._id)}>
 								Edit
 							</Link>
 						</div>

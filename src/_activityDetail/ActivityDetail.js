@@ -45,7 +45,7 @@ class ActivityDetail extends React.Component {
 			return (
 				<img
 					key={posterID}
-					src={`http://api.localtest.me/ecust/activities/${this.activityID}/images/${posterID}`}
+					src={Routes.getActivityImagePath(activity._id, posterID)}
 					style={{width: '30%', maxWidth: '300px', display: 'inline-block'}}
 					title="Activity Poster" alt="Activity Poster"/>
 			)
@@ -67,7 +67,7 @@ class ActivityDetail extends React.Component {
 						<p>{activity.description}</p>
 						{activity.cover ?
 							<img
-								src={`http://api.localtest.me/ecust/activities/${activity._id}/images/${activity.cover}`}
+								src={Routes.getActivityImagePath(activity._id, activity.cover)}
 								style={{width: '90%', maxWidth: '300px'}}
 								title="Activity Cover" alt="Activity Cover"/>
 							: null
@@ -89,11 +89,11 @@ class ActivityDetail extends React.Component {
 							<span>Likes: </span><span>2</span>
 						</div>
 						<div>
-							<Link onlyActiveOnIndex={true} to={`${Routes.postActivity}/${activity._id}`}>
+							<Link onlyActiveOnIndex={true} to={Routes.getUpdateActivityPath(activity._id)}>
 								<RaisedButton label={'Edit'} secondary={true}/>
 							</Link>
 							<span> </span>
-							<Link to={`${Routes.PATH_ACTIVITY_STATISTICS}/${activity._id}`}>
+							<Link to={Routes.getActivityStatistics(activity._id)}>
 								<RaisedButton label={'Statistics'} secondary={true}/>
 							</Link>
 							<br/>

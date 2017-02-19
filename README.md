@@ -6,7 +6,7 @@
 
 ## Running the Example
 
-Cline the codes and install dependencies.
+Clone the codes and install dependencies.
 
 ```bash
 git clone --recursive https://github.com/lovecust/ecust-activities.git

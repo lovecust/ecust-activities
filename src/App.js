@@ -22,12 +22,12 @@ class App extends React.Component {
 		return (
 			<MuiThemeProvider muiTheme={muiTheme}>
 				<Router history={browserHistory}>
-					<Route path={AppRoutes.home} component={ActivityHome}/>
+					<Route path={AppRoutes.ROUTE_HOME} component={ActivityHome}/>
 					{/*<Route path="/_rollin" component={RollInForm}/>*/}
-					<Route path={AppRoutes.postActivity} component={PostAnActivity}/>
-					<Route path={AppRoutes.updateActivity} component={PostAnActivity}/>
+					<Route path={AppRoutes.ROUTE_POST_ACTIVITY} component={PostAnActivity}/>
+					<Route path={AppRoutes.ROUTE_UPDATE_ACTIVITY} component={PostAnActivity}/>
 					<Route path={AppRoutes.ROUTE_ACTIVITY_STATISTICS} component={ActivityStatistics}/>
-					<Route path={AppRoutes.activityDetail} component={ActivityDetail}/>
+					<Route path={AppRoutes.ROUTE_ACTIVITY_DETAIL} component={ActivityDetail}/>
 				</Router>
 			</MuiThemeProvider>
 		);
